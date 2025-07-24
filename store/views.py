@@ -11,7 +11,8 @@ from django.http            import HttpResponse
 from reportlab.pdfgen       import canvas
 from reportlab.lib.pagesizes import letter
 def home(request):
-    return render(request, 'base.html')
+    featured = Book.objects.order_by('-created')[:6]
+    return render(request, 'home.html', {'featured': featured})
 
 def signup_view(request):
     form = SignupForm(request.POST or None)

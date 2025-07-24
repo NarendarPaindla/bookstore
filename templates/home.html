@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-1">
+  <h2>Featured Books</h2>
+  {% if featured %}
+    <div class="book-grid">
+      {% for book in featured %}
+      <div class="book-card">
+        {% if book.cover_img %}
+          <img src="{{ book.cover_img.url }}" alt="{{ book.title }}">
+        {% else %}
+          <div class="cover-placeholder">No Cover</div>
+        {% endif %}
+        <h3>{{ book.title|truncatechars:30 }}</h3>
+        <p class="author">{{ book.author }}</p>
+        <p class="price">${{ book.price }}</p>
+        <p class="rating">⭐ {{ book.rating }}</p>
+
+        <div class="card-buttons">
+          {% if user.is_authenticated %}
+            <a href="{% url 'book_detail' book.slug %}" class="btn-sm btn-view">View</a>
+            <form method="post" action="{% url 'add_to_cart' book.slug %}" class="inline-form">
+              {% csrf_token %}
+              <input type="hidden" name="quantity" value="1">
+              <button type="submit" class="btn-sm btn-add">Add to Cart</button>
+            </form>
+          {% else %}
+            <a href="{% url 'login' %}?next={% url 'home' %}" class="btn-sm btn-view">Login to View</a>
+            <a href="{% url 'login' %}?next={% url 'home' %}" class="btn-sm btn-add">Login to Add</a>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No featured books at the moment.</p>
+  {% endif %}
+</div>
+{% endblock %}
