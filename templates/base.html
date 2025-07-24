@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bookstore</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="container">
+      <a href="{% url 'home' %}" class="logo">📚 Bookstore</a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="{% url 'home' %}">Home</a></li>
+          <li><a href="{% url 'book_list' %}">Books</a></li>
+          {% if user.is_authenticated %}
+            {% if user.is_staff %}
+              <li><a href="{% url 'admin_dashboard' %}">Admin Dashboard</a></li>
+            {% else %}
+              <li><a href="{% url 'user_dashboard' %}">My Dashboard</a></li>
+            {% endif %}
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+          {% else %}
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'signup' %}">Signup</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© 2025 Bookstore • Follow us:</p>
+      <div class="social-icons">
+        <a href="#" aria-label="Twitter">🐦</a>
+        <a href="#" aria-label="Facebook">📘</a>
+        <a href="#" aria-label="Instagram">📸</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

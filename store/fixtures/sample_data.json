@@ -1,0 +1,482 @@
+[
+  {
+    "model": "store.category",
+    "pk": 1,
+    "fields": { "name": "Fiction", "slug": "fiction" }
+  },
+  {
+    "model": "store.category",
+    "pk": 2,
+    "fields": { "name": "Science", "slug": "science" }
+  },
+  {
+    "model": "store.category",
+    "pk": 3,
+    "fields": { "name": "History", "slug": "history" }
+  },
+  {
+    "model": "store.category",
+    "pk": 4,
+    "fields": { "name": "Biography", "slug": "biography" }
+  },
+  {
+    "model": "store.language",
+    "pk": 1,
+    "fields": { "name": "English" }
+  },
+  {
+    "model": "store.language",
+    "pk": 2,
+    "fields": { "name": "Spanish" }
+  },
+  {
+    "model": "store.language",
+    "pk": 3,
+    "fields": { "name": "French" }
+  },
+  {
+    "model": "store.language",
+    "pk": 4,
+    "fields": { "name": "German" }
+  },
+  {
+    "model": "store.publisher",
+    "pk": 1,
+    "fields": { "name": "Penguin Random House", "slug": "penguin-random-house" }
+  },
+  {
+    "model": "store.publisher",
+    "pk": 2,
+    "fields": { "name": "HarperCollins", "slug": "harpercollins" }
+  },
+  {
+    "model": "store.publisher",
+    "pk": 3,
+    "fields": { "name": "Simon & Schuster", "slug": "simon-schuster" }
+  },
+  {
+    "model": "store.publisher",
+    "pk": 4,
+    "fields": { "name": "Macmillan Publishers", "slug": "macmillan-publishers" }
+  },
+  {
+    "model": "store.book",
+    "pk": 1,
+    "fields": {
+      "title": "The Great Gatsby",
+      "slug": "the-great-gatsby",
+      "author": "F. Scott Fitzgerald",
+      "isbn": "9780743273565",
+      "price": "10.99",
+      "stock": 15,
+      "language": 1,
+      "book_format": "hardcopy",
+      "description": "A classic novel of the Jazz Age, set in 1920s Long Island.",
+      "preview": "previews/preview.pdf",
+      "cover_img": "covers/the-great-gatsby.jpg",
+      "rating": "4.2",
+      "category": 1,
+      "publisher": 1,
+      "created": null
+    }
+  },
+  {
+    "model": "store.book",
+    "pk": 2,
+    "fields": {
+      "title": "A Brief History of Time",
+      "slug": "a-brief-history-of-time",
+      "author": "Stephen Hawking",
+      "isbn": "9780553380163",
+      "price": "12.50",
+      "stock": 20,
+      "language": 1,
+      "book_format": "hardcopy",
+      "description": "An overview of cosmology from the Big Bang to black holes.",
+      "preview": "previews/preview.pdf",
+      "cover_img": "covers/a-brief-history-of-time.jpg",
+      "rating": "4.5",
+      "category": 2,
+      "publisher": 2,
+      "created": null
+    }
+  },
+  {
+    "model": "store.book",
+    "pk": 3,
+    "fields": {
+      "title": "1984",
+      "slug": "1984",
+      "author": "George Orwell",
+      "isbn": "9780451524935",
+      "price": "9.99",
+      "stock": 10,
+      "language": 1,
+      "book_format": "hardcopy",
+      "description": "A dystopian novel about totalitarian oppression.",
+      "preview": "previews/preview.pdf",
+      "cover_img": "covers/1984.jpg",
+      "rating": "4.6",
+      "category": 1,
+      "publisher": 3,
+      "created": null
+    }
+  },
+  {
+    "model": "store.book",
+    "pk": 4,
+    "fields": {
+      "title": "To Kill a Mockingbird",
+      "slug": "to-kill-a-mockingbird",
+      "author": "Harper Lee",
+      "isbn": "9780061120084",
+      "price": "11.99",
+      "stock": 8,
+      "language": 1,
+      "book_format": "hardcopy",
+      "description": "A novel about racial injustice in the Deep South.",
+      "preview": "previews/preview.pdf",
+      "cover_img": "covers/to-kill-a-mockingbird.jpg",
+      "rating": "4.8",
+      "category": 4,
+      "publisher": 4,
+      "created": null
+    }
+  },
+  {
+    "model": "store.book",
+    "pk": 5,
+    "fields": {
+      "title": "The Catcher in the Rye",
+      "slug": "the-catcher-in-the-rye",
+      "author": "J.D. Salinger",
+      "isbn": "9780316769488",
+      "price": "10.50",
+      "stock": 12,
+      "language": 1,
+      "book_format": "hardcopy",
+      "description": "A teenager’s experiences in New York City.",
+      "preview": "previews/preview.pdf",
+      "cover_img": "covers/the-catcher-in-the-rye.jpg",
+      "rating": "4.0",
+      "category": 1,
+      "publisher": 1,
+      "created": null
+    }
+  },
+  {
+    "model": "store.book",
+    "pk": 6,
+    "fields": {
+      "title": "Pride and Prejudice",
+      "slug": "pride-and-prejudice",
+      "author": "Jane Austen",
+      "isbn": "9780141439518",
+      "price": "9.75",
+      "stock": 18,
+      "language": 1,
+      "book_format": "hardcopy",
+      "description": "A classic romance novel set in Regency England.",
+      "preview": "previews/preview.pdf",
+      "cover_img": "covers/pride-and-prejudice.jpg",
+      "rating": "4.4",
+      "category": 1,
+      "publisher": 2,
+      "created": null
+    }
+  },
+  {
+    "model": "store.book",
+    "pk": 7,
+    "fields": {
+      "title": "The Lord of the Rings",
+      "slug": "the-lord-of-the-rings",
+      "author": "J.R.R. Tolkien",
+      "isbn": "9780618640157",
+      "price": "25.00",
+      "stock": 5,
+      "language": 1,
+      "book_format": "hardcopy",
+      "description": "An epic fantasy adventure in Middle-earth.",
+      "preview": "previews/preview.pdf",
+      "cover_img": "covers/the-lord-of-the-rings.jpg",
+      "rating": "4.9",
+      "category": 1,
+      "publisher": 3,
+      "created": null
+    }
+  },
+  {
+    "model": "store.book",
+    "pk": 8,
+    "fields": {
+      "title": "Harry Potter and the Sorcerer's Stone",
+      "slug": "harry-potter-and-the-sorcerers-stone",
+      "author": "J.K. Rowling",
+      "isbn": "9780590353427",
+      "price": "14.99",
+      "stock": 30,
+      "language": 1,
+      "book_format": "hardcopy",
+      "description": "The first book in the Harry Potter series.",
+      "preview": "previews/preview.pdf",
+      "cover_img": "covers/harry-potter-and-the-sorcerers-stone.jpg",
+      "rating": "4.7",
+      "category": 1,
+      "publisher": 4,
+      "created": null
+    }
+  },
+  {
+    "model": "store.book",
+    "pk": 9,
+    "fields": {
+      "title": "The Da Vinci Code",
+      "slug": "the-da-vinci-code",
+      "author": "Dan Brown",
+      "isbn": "9780307474278",
+      "price": "13.50",
+      "stock": 22,
+      "language": 1,
+      "book_format": "hardcopy",
+      "description": "A mystery thriller about art, religion, and secrets.",
+      "preview": "previews/preview.pdf",
+      "cover_img": "covers/the-da-vinci-code.jpg",
+      "rating": "4.1",
+      "category": 1,
+      "publisher": 1,
+      "created": null
+    }
+  },
+  {
+    "model": "store.book",
+    "pk": 10,
+    "fields": {
+      "title": "The Alchemist",
+      "slug": "the-alchemist",
+      "author": "Paulo Coelho",
+      "isbn": "9780062315007",
+      "price": "11.00",
+      "stock": 16,
+      "language": 1,
+      "book_format": "hardcopy",
+      "description": "A fable about following your dreams.",
+      "preview": "previews/preview.pdf",
+      "cover_img": "covers/the-alchemist.jpg",
+      "rating": "4.3",
+      "category": 1,
+      "publisher": 2,
+      "created": null
+    }
+  },
+  {
+    "model": "store.book",
+    "pk": 11,
+    "fields": {
+      "title": "The Little Prince",
+      "slug": "the-little-prince",
+      "author": "Antoine de Saint-Exupéry",
+      "isbn": "9780156012195",
+      "price": "8.99",
+      "stock": 14,
+      "language": 3,
+      "book_format": "hardcopy",
+      "description": "A poetic tale about love and loss.",
+      "preview": "previews/preview.pdf",
+      "cover_img": "covers/the-little-prince.jpg",
+      "rating": "4.6",
+      "category": 1,
+      "publisher": 3,
+      "created": null
+    }
+  },
+  {
+    "model": "store.book",
+    "pk": 12,
+    "fields": {
+      "title": "Moby Dick",
+      "slug": "moby-dick",
+      "author": "Herman Melville",
+      "isbn": "9780142437247",
+      "price": "12.99",
+      "stock": 7,
+      "language": 1,
+      "book_format": "hardcopy",
+      "description": "A sailor’s narrative of the obsessive quest for a white whale.",
+      "preview": "previews/preview.pdf",
+      "cover_img": "covers/moby-dick.jpg",
+      "rating": "4.0",
+      "category": 1,
+      "publisher": 4,
+      "created": null
+    }
+  },
+  {
+    "model": "store.book",
+    "pk": 13,
+    "fields": {
+      "title": "War and Peace",
+      "slug": "war-and-peace",
+      "author": "Leo Tolstoy",
+      "isbn": "9780199232765",
+      "price": "18.50",
+      "stock": 6,
+      "language": 1,
+      "book_format": "hardcopy",
+      "description": "A historical epic of Russia during the Napoleonic era.",
+      "preview": "previews/preview.pdf",
+      "cover_img": "covers/war-and-peace.jpg",
+      "rating": "4.4",
+      "category": 3,
+      "publisher": 1,
+      "created": null
+    }
+  },
+  {
+    "model": "store.book",
+    "pk": 14,
+    "fields": {
+      "title": "Crime and Punishment",
+      "slug": "crime-and-punishment",
+      "author": "Fyodor Dostoevsky",
+      "isbn": "9780143058144",
+      "price": "13.99",
+      "stock": 9,
+      "language": 1,
+      "book_format": "hardcopy",
+      "description": "A psychological exploration of guilt and redemption.",
+      "preview": "previews/preview.pdf",
+      "cover_img": "covers/crime-and-punishment.jpg",
+      "rating": "4.5",
+      "category": 1,
+      "publisher": 2,
+      "created": null
+    }
+  },
+  {
+    "model": "store.book",
+    "pk": 15,
+    "fields": {
+      "title": "Jane Eyre",
+      "slug": "jane-eyre",
+      "author": "Charlotte Brontë",
+      "isbn": "9780141441146",
+      "price": "9.50",
+      "stock": 11,
+      "language": 1,
+      "book_format": "hardcopy",
+      "description": "A gothic novel of love and independence.",
+      "preview": "previews/preview.pdf",
+      "cover_img": "covers/jane-eyre.jpg",
+      "rating": "4.3",
+      "category": 1,
+      "publisher": 3,
+      "created": null
+    }
+  },
+  {
+    "model": "store.book",
+    "pk": 16,
+    "fields": {
+      "title": "The Chronicles of Narnia",
+      "slug": "the-chronicles-of-narnia",
+      "author": "C.S. Lewis",
+      "isbn": "9780066238500",
+      "price": "29.99",
+      "stock": 4,
+      "language": 1,
+      "book_format": "hardcopy",
+      "description": "A series of fantasy adventures in Narnia.",
+      "preview": "previews/preview.pdf",
+      "cover_img": "covers/the-chronicles-of-narnia.jpg",
+      "rating": "4.7",
+      "category": 1,
+      "publisher": 4,
+      "created": null
+    }
+  },
+  {
+    "model": "store.book",
+    "pk": 17,
+    "fields": {
+      "title": "The Kite Runner",
+      "slug": "the-kite-runner",
+      "author": "Khaled Hosseini",
+      "isbn": "9781594631931",
+      "price": "12.00",
+      "stock": 13,
+      "language": 1,
+      "book_format": "hardcopy",
+      "description": "A story of friendship and redemption in Afghanistan.",
+      "preview": "previews/preview.pdf",
+      "cover_img": "covers/the-kite-runner.jpg",
+      "rating": "4.8",
+      "category": 1,
+      "publisher": 1,
+      "created": null
+    }
+  },
+  {
+    "model": "store.book",
+    "pk": 18,
+    "fields": {
+      "title": "The Hunger Games",
+      "slug": "the-hunger-games",
+      "author": "Suzanne Collins",
+      "isbn": "9780439023481",
+      "price": "10.99",
+      "stock": 25,
+      "language": 1,
+      "book_format": "hardcopy",
+      "description": "A dystopian competition for survival.",
+      "preview": "previews/preview.pdf",
+      "cover_img": "covers/the-hunger-games.jpg",
+      "rating": "4.4",
+      "category": 1,
+      "publisher": 2,
+      "created": null
+    }
+  },
+  {
+    "model": "store.book",
+    "pk": 19,
+    "fields": {
+      "title": "Fahrenheit 451",
+      "slug": "fahrenheit-451",
+      "author": "Ray Bradbury",
+      "isbn": "9781451673319",
+      "price": "11.50",
+      "stock": 14,
+      "language": 1,
+      "book_format": "hardcopy",
+      "description": "A novel about book burning in a dystopian future.",
+      "preview": "previews/preview.pdf",
+      "cover_img": "covers/fahrenheit-451.jpg",
+      "rating": "4.1",
+      "category": 1,
+      "publisher": 3,
+      "created": null
+    }
+  },
+  {
+    "model": "store.book",
+    "pk": 20,
+    "fields": {
+      "title": "The Girl with the Dragon Tattoo",
+      "slug": "the-girl-with-the-dragon-tattoo",
+      "author": "Stieg Larsson",
+      "isbn": "9780307454546",
+      "price": "13.99",
+      "stock": 17,
+      "language": 1,
+      "book_format": "hardcopy",
+      "description": "A mystery thriller featuring Lisbeth Salander.",
+      "preview": "previews/preview.pdf",
+      "cover_img": "covers/the-girl-with-the-dragon-tattoo.jpg",
+      "rating": "4.2",
+      "category": 1,
+      "publisher": 4,
+      "created": null
+    }
+  }
+]

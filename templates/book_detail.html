@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-1">
+  <div class="detail-grid">
+    <div class="cover-column">
+      {% if book.cover_img %}
+        <img src="{{ book.cover_img.url }}" alt="{{ book.title }}">
+      {% endif %}
+      {% if book.preview %}
+        <button id="previewBtn" class="btn mt-1">Preview Book</button>
+      {% endif %}
+    </div>
+    <div class="info-column">
+      <h1>{{ book.title }}</h1>
+      <p class="author">by {{ book.author }}</p>
+      <p class="price">${{ book.price }}</p>
+      <p class="desc">{{ book.description }}</p>
+      <p><strong>Format:</strong> {{ book.get_book_format_display }}</p>
+    </div>
+  </div>
+</div>
+
+<div id="previewModal" class="modal hidden">
+  <div class="modal-content">
+    <span id="closeModal" class="modal-close">&times;</span>
+    {% if book.preview.url.endswith:".pdf" %}
+      <iframe src="{{ book.preview.url }}" width="100%" height="600px"></iframe>
+    {% else %}
+      <img src="{{ book.preview.url }}" alt="Preview">
+    {% endif %}
+  </div>
+</div>
+
+<script>
+const modal = document.getElementById('previewModal');
+document.getElementById('previewBtn')?.addEventListener('click', ()=> modal.classList.remove('hidden'));
+document.getElementById('closeModal')?.addEventListener('click', ()=> modal.classList.add('hidden'));
+</script>
+{% endblock %}

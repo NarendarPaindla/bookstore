@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="form-card mt-1">
+  <h2>Create Account</h2>
+  <form method="post" novalidate>
+    {% csrf_token %}
+
+    <!-- Username -->
+    <div class="form-group">
+      {{ form.username.label_tag }}
+      {{ form.username }}
+      <small id="id_username-help" class="help-text">
+        150 char max. Letters, digits &amp; @ . + - _ only.
+      </small>
+      {% for e in form.username.errors %}
+        <div class="error">{{ e }}</div>
+      {% endfor %}
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+      {{ form.email.label_tag }}
+      {{ form.email }}
+      <small id="id_email-help" class="help-text">
+        We'll never share your email.
+      </small>
+      {% for e in form.email.errors %}
+        <div class="error">{{ e }}</div>
+      {% endfor %}
+    </div>
+
+    <!-- Password -->
+    <div class="form-group">
+      {{ form.password1.label_tag }}
+      {{ form.password1 }}
+      <small id="id_password1-help" class="help-text">
+        Min 8 characters, can’t be entirely numeric.
+      </small>
+      {% for e in form.password1.errors %}
+        <div class="error">{{ e }}</div>
+      {% endfor %}
+    </div>
+
+    <!-- Confirm Password -->
+    <div class="form-group">
+      {{ form.password2.label_tag }}
+      {{ form.password2 }}
+      <small id="id_password2-help" class="help-text">
+        Enter same password again.
+      </small>
+      {% for e in form.password2.errors %}
+        <div class="error">{{ e }}</div>
+      {% endfor %}
+    </div>
+
+    <button type="submit" class="btn">Sign Up</button>
+  </form>
+  <p class="mt-1">Already have an account? <a href="{% url 'login' %}">Login here</a>.</p>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.form-input').forEach(input => {
+    const hint = document.getElementById(input.id + '-help');
+    if (!hint) return;
+    input.addEventListener('input', () => {
+      hint.style.display = input.value.length ? 'block' : 'none';
+    });
+  });
+});
+</script>
+{% endblock %}
