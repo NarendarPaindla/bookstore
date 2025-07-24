@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-1">
+  <h2>Thank you! Your order #{{ order.id }} is confirmed.</h2>
+  <p>Order Date: {{ order.created }}</p>
+
+  <!-- Updated link -->
+  <a href="{% url 'invoice_pdf' order.id %}" class="btn">Download Invoice (PDF)</a>
+  <a href="{% url 'book_list' %}" class="btn mt-1">Continue Shopping</a>
+</div>
+{% endblock %}

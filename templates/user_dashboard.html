@@ -3,5 +3,8 @@
 <div class="container">
   <h1>Welcome, {{ request.user.username }}!</h1>
   <p>This is your customer dashboard.</p>
+  <a href="{% url 'cart' %}" class="btn mt-1">View Cart</a>
+  <a href="{% url 'cart' %}" class="btn mt-1">View Cart</a>
+<a href="{% url 'order_history' %}" class="btn mt-1">Order History</a>
 </div>
 {% endblock %}

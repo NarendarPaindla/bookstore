@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 </head>
 <body>
+  <!-- Navbar -->
   <header class="navbar">
     <div class="container">
       <a href="{% url 'home' %}" class="logo">📚 Bookstore</a>
@@ -16,6 +17,9 @@
           <li><a href="{% url 'home' %}">Home</a></li>
           <li><a href="{% url 'book_list' %}">Books</a></li>
           {% if user.is_authenticated %}
+            <li><a href="{% url 'cart' %}">Cart</a></li>
+            
+  <li><a href="{% url 'order_history' %}">Orders</a></li>
             {% if user.is_staff %}
               <li><a href="{% url 'admin_dashboard' %}">Admin Dashboard</a></li>
             {% else %}
@@ -31,10 +35,12 @@
     </div>
   </header>
 
+  <!-- Main Content -->
   <main class="container content">
     {% block content %}{% endblock %}
   </main>
 
+  <!-- Footer -->
   <footer class="footer">
     <div class="container">
       <p>© 2025 Bookstore • Follow us:</p>
