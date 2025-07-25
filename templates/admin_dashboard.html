@@ -1,7 +1,71 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container">
-  <h1>Admin Panel</h1>
-  <p>Manage your store here.</p>
+
+<div class="container mt-1">
+  <h1>Admin Dashboard</h1>
+
+  <div class="stats-grid">
+    <!-- Monthly Revenue Chart -->
+    <div class="card">
+      <h3>Monthly Revenue (Last 6 Months)</h3>
+      <canvas id="revenueChart"></canvas>
+    </div>
+
+    <!-- Bestselling Books Chart -->
+    <div class="card">
+      <h3>Top 5 Bestselling Books</h3>
+      <canvas id="bestsellersChart"></canvas>
+    </div>
+
+    <!-- Low Stock Alerts -->
+    <div class="card">
+      <h3>Low Stock Alerts</h3>
+      <ul>
+        {% for book in low_stock %}
+          <li>{{ book.title }} — {{ book.stock }} left</li>
+        {% empty %}
+          <li>No low-stock items.</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
 </div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // Revenue Line Chart
+  new Chart(document.getElementById('revenueChart'), {
+    type: 'line',
+    data: {
+      labels: {{ months|safe }},
+      datasets: [{
+        label: 'Revenue ($)',
+        data: {{ revenues|safe }},
+        fill: true,
+        tension: 0.4
+      }]
+    },
+    options: {
+      scales: { y: { beginAtZero:true } }
+    }
+  });
+
+  // Bestsellers Bar Chart
+  new Chart(document.getElementById('bestsellersChart'), {
+    type: 'bar',
+    data: {
+      labels: {{ bs_titles|safe }},
+      datasets: [{
+        label: 'Units Sold',
+        data: {{ bs_quantities|safe }},
+        borderRadius: 4
+      }]
+    },
+    options: {
+      scales: { y: { beginAtZero:true } }
+    }
+  });
+</script>
+
 {% endblock %}

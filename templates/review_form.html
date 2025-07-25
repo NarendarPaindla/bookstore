@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-1">
+  <h2>Review "{{ book.title }}"</h2>
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      {{ form.rating.label_tag }}
+      {{ form.rating }}
+    </div>
+    <div class="form-group">
+      {{ form.text.label_tag }}
+      {{ form.text }}
+    </div>
+    <button type="submit" class="btn">Submit Review</button>
+    <a href="{% url 'review_list' book.slug %}" class="btn btn-sm">Back to Reviews</a>
+  </form>
+</div>
+{% endblock %}

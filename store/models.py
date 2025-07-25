@@ -106,3 +106,14 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f"{self.quantity} × {self.book.title}"
+class Review(models.Model):
+    RATING_CHOICES = [(i, f"{i} Star{'s' if i>1 else ''}") for i in range(1,6)]
+    user     = models.ForeignKey(User, on_delete=models.CASCADE)
+    book     = models.ForeignKey('Book', on_delete=models.CASCADE, related_name='reviews')
+    rating   = models.IntegerField(choices=RATING_CHOICES)
+    text     = models.TextField()
+    created  = models.DateTimeField(auto_now_add=True)
+    approved = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.rating}★ by {self.user.username} on {self.book.title}"

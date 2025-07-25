@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-1">
+  <h2>Reviews for "{{ book.title }}"</h2>
+  {% if reviews %}
+    <ul class="review-list">
+      {% for r in reviews %}
+      <li>
+        <div class="stars">
+          {% for i in "12345"|slice:":r.rating"|default:"" %}
+            <span class="star filled">★</span>
+          {% endfor %}
+          {% for i in "12345"|slice:"r.rating:" %}
+            <span class="star">☆</span>
+          {% endfor %}
+        </div>
+        <p class="review-text">{{ r.text }}</p>
+        <p class="review-meta">— {{ r.user.username }}, {{ r.created|date:"M j, Y" }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No reviews yet.</p>
+  {% endif %}
+  {% if user.is_authenticated %}
+    <a href="{% url 'review_create' book.slug %}" class="btn">Write a Review</a>
+  {% else %}
+    <a href="{% url 'login' %}?next={% url 'review_list' book.slug %}" class="btn">Login to Write</a>
+  {% endif %}
+</div>
+{% endblock %}

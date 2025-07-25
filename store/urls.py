@@ -21,4 +21,9 @@ urlpatterns = [
     path('orders/<int:order_id>/',         views.order_detail,  name='order_detail'),
     path('orders/<int:order_id>/cancel/',  views.cancel_order,  name='cancel_order'),
     path('orders/<int:order_id>/reorder/', views.reorder,       name='reorder'),
+    path('downloads/',               views.downloads,      name='downloads'),
+    path('download/<int:item_pk>/',  views.download_book,  name='download_book'),
+    path('books/<slug:slug>/reviews/',     views.review_list,   name='review_list'),
+    path('books/<slug:slug>/reviews/new/', views.review_create, name='review_create'),
+    path('admin-dashboard/', views.admin_dashboard, name='admin_dashboard'),
 ]

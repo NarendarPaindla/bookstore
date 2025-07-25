@@ -4,12 +4,20 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from .forms                       import SignupForm
 from django.contrib.auth.forms    import AuthenticationForm
 from django.core.paginator import Paginator
-from .models import Book, Category, Publisher,Order, OrderItem
+from .models import Book, Category, Publisher,Order, OrderItem,Review
 from decimal                 import Decimal
 from django.urls             import reverse
 from django.http            import HttpResponse
 from reportlab.pdfgen       import canvas
 from reportlab.lib.pagesizes import letter
+from django.http            import FileResponse, Http404
+from .models                import Book, Order, OrderItem
+from .forms                         import ReviewForm
+from django.db.models               import Sum, F
+from django.db.models.functions     import TruncMonth
+from django.utils                   import timezone
+from datetime                       import timedelta
+import os
 def home(request):
     featured = Book.objects.order_by('-created')[:6]
     return render(request, 'home.html', {'featured': featured})
@@ -225,3 +233,94 @@ def invoice_pdf(request, order_id):
     p.showPage()
     p.save()
     return response
+@login_required
+def downloads(request):
+    # All items where user bought an ebook
+    items = OrderItem.objects.filter(
+        order__user=request.user,
+        book__book_format='ebook'
+    ).select_related('book')
+    return render(request, 'downloads.html', {'items': items})
+
+@login_required
+def download_book(request, item_pk):
+    item = get_object_or_404(
+        OrderItem,
+        pk=item_pk,
+        order__user=request.user,
+        book__book_format='ebook'
+    )
+    file_path = item.book.preview.path
+    if not os.path.exists(file_path):
+        raise Http404("File not found")
+    filename = os.path.basename(file_path)
+    return FileResponse(open(file_path, 'rb'), as_attachment=True, filename=filename)
+def review_list(request, slug):
+    book    = get_object_or_404(Book, slug=slug)
+    reviews = book.reviews.filter(approved=True).order_by('-created')
+    return render(request, 'review_list.html', {'book':book,'reviews':reviews})
+
+@login_required
+def review_create(request, slug):
+    book = get_object_or_404(Book, slug=slug)
+    # Verify purchase
+    purchased = OrderItem.objects.filter(
+        order__user=request.user,
+        order__status__in=['paid','shipped','delivered'],
+        book=book
+    ).exists()
+    if not purchased:
+        return redirect('book_detail', slug=slug)
+
+    form = ReviewForm(request.POST or None)
+    if form.is_valid():
+        rev         = form.save(commit=False)
+        rev.user    = request.user
+        rev.book    = book
+        rev.save()
+        return redirect('review_list', slug=slug)
+
+    return render(request, 'review_form.html', {'form':form, 'book':book})
+def is_staff(user):
+    return user.is_staff
+
+@login_required
+@user_passes_test(is_staff)
+def admin_dashboard(request):
+    # 1) Revenue over last 6 months
+    six_months_ago = timezone.now() - timedelta(days=180)
+    revenue_qs = (
+        OrderItem.objects
+        .filter(
+            order__status__in=['paid','shipped','delivered'],
+            order__created__gte=six_months_ago
+        )
+        .annotate(month=TruncMonth('order__created'))
+        .values('month')
+        .annotate(revenue=Sum(F('price') * F('quantity')))
+        .order_by('month')
+    )
+    months   = [ item['month'].strftime('%b %Y')   for item in revenue_qs ]
+    revenues = [ float(item['revenue'] or 0)        for item in revenue_qs ]
+
+    # 2) Top 5 bestselling books
+    bs_qs = (
+        OrderItem.objects
+        .filter(order__status__in=['paid','shipped','delivered'])
+        .values('book__title')
+        .annotate(units_sold=Sum('quantity'))
+        .order_by('-units_sold')[:5]
+    )
+    bs_titles     = [ item['book__title']   for item in bs_qs ]
+    bs_quantities = [ item['units_sold']     for item in bs_qs ]
+
+    # 3) Low-stock alerts (<= 5)
+    low_stock = Book.objects.filter(stock__lte=5).order_by('stock')
+
+    return render(request, 'admin_dashboard.html', {
+        'months': months,
+        'revenues': revenues,
+        'bs_titles': bs_titles,
+        'bs_quantities': bs_quantities,
+        'low_stock': low_stock,
+    })
